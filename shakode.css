@@ -26,21 +26,32 @@ input[type="button"]:hover
  padding:0.3em 0.8em;
 }
 
-#concentration_button
+#loaded_info
+{
+ font-size:large;
+ font-weight:bold;
+}
+select
+{
+ font-size:large;
+ font-weight:bold;
+}
+
+#code_menu
 {
  position:sticky;
  top:0;
  bottom:0;
  left:0;
-}
-
-#save_area
-{
- position:sticky;
- top:0;
  right:0;
  text-align:right;
  color:#777777;
+}
+
+#concentration_button
+{
+ position:absolute;
+ left:0;
 }
 
 #learning_code
