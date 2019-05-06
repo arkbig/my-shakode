@@ -3,7 +3,7 @@
 <head>
  <meta charset="UTF-8">
  <title>shakode</title> 
- <lnk rel="stylesheet" href="./shakode.css">
+ <link rel="stylesheet" href="./shakode.css">
  <script src="./shakode.js"></script>
 </head>
 <body>
@@ -13,26 +13,25 @@
   <p>
    Load the target as
    '<input name="target_alias" type="text" placeholder="%{Please Input Alias}">'.
-   <input name="target_directory" type="file" webkitdirectory>
+   <input name="select_target" type="file" webkitdirectory>
    <input type="button" onClick="onLoadTarget();" value="Load it.">
   </p>
  </form>
 
- <h3>Loaded code is '<span id="loaded_name">%{Please Load}</span>'</h3>
+ <h3>Loaded is '<span id="loaded_name">%{Please Load}</span>'</h3>
  <p id="loaded_tree">
   ⊟ If loaded, the target directory tree will be displayed here.
  </p>
 </div>
 
-<p id="concentration_buttons">
- <input name="focus_code" type="button" onClick="onFocusCode();" value="Focus on the code!">
- <input name="blur_code" type="button" onClick="onBlurCode();" value="...">
-</p>
+<input id="concentration_button" type="button" onClick="onToggleFocusCode();" value="Focus on the code!">
 
 <form>
- <input type="button" onClick="onSaveCode();" value="save">
- <span id="current_code">NOT LOADED</span>
- <br>
+ <div id="save_area">
+   <input type="button" onClick="onSaveCode();" value="save">
+   <span id="current_code">NOT LOADED</span>
+ </div>
+
  <textarea id="learning_code" type="textarea" placeholder="Enter the code here."></textarea>
  <textarea id="teacher_code" type="textarea" disabled placeholder="&#13;&#10;Teacher code is displayed behind."></textarea>
 <form>
