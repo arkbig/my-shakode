@@ -1,0 +1,47 @@
+<!html>
+<html>
+<header>
+
+<style src="./shakode.css">
+<script src="./shakode.js">
+
+</header>
+<body>
+
+<form id="target_input">
+ <p>
+  Target is
+  <input id="target_directory" type="file" webkitdirectory/>
+  as
+  <input id="target_alias" type="text/">
+  .
+  <input type="button" onClick="onSselectTarget;" text="load_it."/>
+ </p>
+</form>
+
+<div id="loaded_info">
+ <h3>
+  Loaded code is
+  <span id="loaded_name"/>
+ </h3>
+ <div id="loaded_tree"/>
+</div>
+
+<p id="concern_button">
+ <input id="focus_code" type="button" onClick="onFocusCode;" text="focus on code"/>
+ <input id="blur_code" type="button" onClick="onBlurCode;" text="..."/>
+</p>
+
+<form id="learning_info">
+ <p id="save_area">
+  <input type="button" onClick="onSaveCode;" text="save">
+  <span id="current_code">
+  .
+ </p>
+ <input id="learning_code" type="textarea"/>
+ <input id="teacher_code" type="textarea"/>
+<form/>
+
+
+</body>
+</html>
