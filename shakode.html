@@ -8,40 +8,34 @@
 </head>
 <body>
 
-<form id="target_input">
- <p>
-  Target is
-  <input id="target_directory" type="file" webkitdirectory/>
-  as
-  <input id="target_alias" type="text/">
-  .
-  <input type="button" onClick="onSselectTarget;" text="load_it."/>
- </p>
-</form>
+<div id="target_info">
+ <form>
+  <p>
+   Load the target as
+   '<input name="target_alias" type="text" placeholder="%{Please Input Alias}">'.
+   <input name="target_directory" type="file" webkitdirectory>
+   <input type="button" onClick="onLoadTarget();" value="Load it.">
+  </p>
+ </form>
 
-<div id="loaded_info">
- <h3>
-  Loaded code is
-  <span id="loaded_name"/>
- </h3>
- <div id="loaded_tree"/>
+ <h3>Loaded code is '<span id="loaded_name">%{Please Load}</span>'</h3>
+ <p id="loaded_tree">
+  ⊟ If loaded, the target directory tree will be displayed here.
+ </p>
 </div>
 
-<p id="concern_button">
- <input id="focus_code" type="button" onClick="onFocusCode;" text="focus on code"/>
- <input id="blur_code" type="button" onClick="onBlurCode;" text="..."/>
+<p id="concentration_buttons">
+ <input name="focus_code" type="button" onClick="onFocusCode();" value="Focus on the code!">
+ <input name="blur_code" type="button" onClick="onBlurCode();" value="...">
 </p>
 
-<form id="learning_info">
- <p id="save_area">
-  <input type="button" onClick="onSaveCode;" text="save">
-  <span id="current_code">
-  .
- </p>
- <input id="learning_code" type="textarea"/>
- <input id="teacher_code" type="textarea"/>
-<form/>
-
+<form>
+ <input type="button" onClick="onSaveCode();" value="save">
+ <span id="current_code">NOT LOADED</span>
+ <br>
+ <textarea id="learning_code" type="textarea" placeholder="Enter the code here."></textarea>
+ <textarea id="teacher_code" type="textarea" disabled placeholder="&#13;&#10;Teacher code is displayed behind."></textarea>
+<form>
 
 </body>
 </html>
