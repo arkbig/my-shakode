@@ -1,25 +1,60 @@
 body
 {
-文字色を薄く;
+ color:#333333;
+ background-color:#ffffff;
 }
 
-#concern_button
+input[type="button"]
 {
-下部常時表示;
+ color:#666666;
+ background-color:#ffffff;
+ display:inline-block;
+ padding:0.4em 0.8em;
+ margin:0.1em 0.1em;
+ text-decoration:none;
+ border:solid 1px #999999;
+ border-radius:3px;
+}
+input[type="button"]:hover
+{
+ color:#ffffcc;
+ background-color:#333366;
+}
+#select_target
+{
+ font-size:small;
+ padding:0.3em 0.8em;
+}
+
+#concentration_button
+{
+ position:sticky;
+ top:0;
+ bottom:0;
+ left:0;
 }
 
 #save_area
 {
-上部常時表示;
+ position:sticky;
+ top:0;
+ right:0;
+ text-align:right;
+ color:#777777;
 }
 
 #learning_code
 {
-背景色透過;
-サイズ目一杯;
+ resize:none;
+ color:#111111;
+ background-color:#ffffff00;
+ width:calc(99vw - 2em);
+ height:90vh;
 }
 
 #teacher_code
 {
-サイズ目一杯;
+ resize:none;
+ color:#888888;
+ background-color:#ffffffff;
 }
