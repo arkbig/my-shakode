@@ -40,18 +40,16 @@ select
 #code_menu
 {
  position:sticky;
- top:0;
- bottom:0;
- left:0;
- right:0;
- text-align:right;
+ top:0px;
+ bottom:0px;
+ left:0px;
+ right:0px;
  color:#777777;
 }
 
-#concentration_button
+#codes
 {
- position:absolute;
- left:0;
+ position:relative;
 }
 
 #learning_code
@@ -61,6 +59,9 @@ select
  background-color:#ffffff00;
  width:calc(99vw - 2em);
  height:90vh;
+ position:absolute;
+ top:0px;
+ left:0px;
 }
 
 #teacher_code
@@ -68,4 +69,10 @@ select
  resize:none;
  color:#888888;
  background-color:#ffffffff;
+ width:calc(99vw - 2em);
+ height:90vh;
+ position:absolute;
+ top:0px;
+ left:0px;
+ z-index:-1;
 }

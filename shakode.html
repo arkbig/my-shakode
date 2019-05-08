@@ -9,17 +9,17 @@
 <body>
 
 <div id="target_info">
- <form>
-  <p id="load_input">
-   Load the target as
-   '<input name="target_alias" type="text" placeholder="%{Please Input Alias}">'.
-   <input name="select_target" type="file" directory webkitdirectory>
-   <input type="button" onClick="onLoadTarget();" value="Load it.">
-  </p>
+ <form id="load_input">
+  Load the target as
+  '<input id="target_alias_text" type="text" placeholder="%{Please Input Alias}">'.
+  <input id="select_target_button" type="file" directory webkitdirectory>
+  <input id="load_target_button" type="button" value="Load it.">
  </form>
 
  <p id="loaded_info">Loaded is
-  <select name="loaded_target"><option>%{NOT LOADED}</option></select>
+  <select id="loaded_target_selection">
+   <option id="loaded_target_placeholder">%{NOT LOADED}</option>
+  </select>
  </p>
  <p id="loaded_tree">
   ⊟ If loaded, the target directory tree will be displayed here.
@@ -29,19 +29,19 @@
 <div id="code_info">
  <form>
   <div id="code_menu">
-   <input id="concentration_button" type="button" onClick="onToggleFocusCode();" value="Focus on the code!">
-   &nbsp;&nbsp;
-   <input id="flip_button" type="button" onClick="onToggleFlipCode();" value="Flip to teacher code.">
-   <span id="current_page">Learning</span>.
-   &nbsp;&nbsp;
-   <input type="button" onClick="onSaveCode();" value="Save">
-   <span id="current_code">NOT LOADED</span>
+   <input id="concentration_button" type="button" value="Focus on the code!">
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <input id="flip_button" type="button" value="Flip to teacher code.">
+   <ruby id="current_page">Learning<rt>current_is</rt></ruby>.
+   &nbsp;&nbsp;&nbsp;
+   <input id="save_button" type="button" value="Save">
+   <ruby id="current_file">NOT LOADED<rt>current_is</rt></ruby>.
+   <input id="save_as_button" type="button" value="Save as ...">
   </div>
 
-  <textarea id="learning_code" type="textarea" placeholder="Enter the code here."></textarea>
-  <textarea id="teacher_code" type="textarea" disabled placeholder="&#13;&#10;Teacher code is displayed behind."></textarea>
+  <div id="codes">
+   <textarea id="learning_code" type="textarea" placeholder="Enter the code here."></textarea>
+   <textarea id="teacher_code" type="textarea" disabled placeholder="&#13;&#10;Teacher code is displayed behind."></textarea>
+  </div>
  <form>
 </div>
-
-</body>
-</html>
