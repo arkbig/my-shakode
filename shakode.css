@@ -45,6 +45,7 @@ select
  left:0px;
  right:0px;
  color:#777777;
+ z-index:1
 }
 
 #codes
@@ -58,10 +59,7 @@ select
  color:#111111;
  background-color:#ffffff00;
  width:calc(99vw - 2em);
- height:90vh;
- position:absolute;
- top:0px;
- left:0px;
+ height:92vh;
 }
 
 #teacher_code
@@ -70,7 +68,7 @@ select
  color:#888888;
  background-color:#ffffffff;
  width:calc(99vw - 2em);
- height:90vh;
+ height:92vh;
  position:absolute;
  top:0px;
  left:0px;

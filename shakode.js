@@ -46,6 +46,9 @@ window.onload = function(){
     } else {
         shakode.blur_code();
     }
+
+    //TODO. Test
+    shakode.resize_codes();
 };
 
 shakode.onUpdatedStorage = function(key, oldValue, newValue)
@@ -198,4 +201,12 @@ shakode.save_learning_code = function()
 shakode.save_tearcher_code = function()
 {
     //教師ページ保存
+}
+
+shakode.resize_codes = function()
+{
+    var width = document.body.clientWidth;
+    //shakode.learning_code.style.right = width;
+    //shakode.teacher_code.style.right = width;
+    
 }
