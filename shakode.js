@@ -1,6 +1,17 @@
 shakode={}
 
-window.onload = function(){
+function ready(callback){
+    // in case the document is already rendered
+    if (document.readyState!='loading') callback();
+    // modern browsers
+    else if (document.addEventListener) document.addEventListener('DOMContentLoaded', callback);
+    // IE <= 8
+    else document.attachEvent('onreadystatechange', function(){
+        if (document.readyState=='complete') callback();
+    });
+}
+
+ready(function(){
     shakode.storage = window.localstorage
     window.addEventListener("storage", function(e){
         if (e.storageArea===shakode.storage) {
@@ -47,9 +58,36 @@ window.onload = function(){
         shakode.blur_code();
     }
 
-    //TODO. Test
-    shakode.resize_codes();
-};
+    shakode.concentration_button.addEventListener("click", function(){
+        if (shakode.is_focus_code()) {
+            shakode.blur_code();
+        } else {
+            shakode.focus_code();
+        }
+    });
+
+    shakode.flip_button.addEventListener("click", function(){
+        if (shakode.is_current_learning()) {
+            shakode.flip_to_teacher_code();
+        } else {
+            shakode.flip_to_learning_code();
+        }
+    });
+
+    shakode.save_button.addEventListener("click", function(){
+        if (shakode.is_current_learning()) {
+            shakode.save_learning_code();
+        } else {
+            shakode.save_teacher_code();
+        }
+    });
+    shakode.save_as_button.addEventListener("click", function(){
+        if (shakode.is_current_teacher()) {
+            shakode.save_as_teacher_code();
+        }
+    });
+});
+
 
 shakode.onUpdatedStorage = function(key, oldValue, newValue)
 {
@@ -80,6 +118,24 @@ shakode.is_support_input_directory = function()
     return true;
 }
 
+shakode.is_blur_code = function()
+{
+    return shakode.target_info.style.display != "none";
+}
+shakode.is_focus_code = function()
+{
+    return !shakode.is_blur_code();
+}
+
+shakode.is_current_learning = function()
+{
+    return shakode.learning_code.style.display != "none";
+}
+shakode.is_current_teacher = function()
+{
+    return !shakode.is_current_learning();
+}
+
 shakode.init_for_directory_mode = function()
 {
     shakode.target_alias_text = document.getElementById("target_alias_text");
@@ -96,7 +152,7 @@ shakode.init_for_file_mode = function()
 
 shakode.is_exists_storage_data = function()
 {
-    
+
 }
 
 shakode.onInputedTarget = function()
@@ -128,85 +184,45 @@ shakode.change_target = function()
     /*ツリー構築*/
 }
 
-shakode.onToggleFocusCode = function()
-{
-    /*
-    モード？
-    　・設定モードなら、focus_code();
-    　・集中モードなら、blur_code();
-      */
-}
-
 shakode.focus_code = function()
 {
-    /*
-#target_info 非表示
-#concentration_button.value="...";
-    先頭へ移動
-      */
+    shakode.target_info.style.display = "none";
+    shakode.concentration_button.value="...";
 }
 
 shakode.blur_code = function()
 {
-    /*
-#target_info 表示
-#concentration_button.value="Focus on the code!";
-    先頭へ移動
-      */
+    shakode.target_info.style.display = "block";
+    shakode.concentration_button.value="Focus on the code!";
+    window.scrollTo(0,0);
 }
 
-shakode.onToggleFlipCode = function()
+shakode.flip_to_teacher_code = function()
 {
-    /*
-    どのページ？
-    　・勉強ページなら、flip_to_teacher_code();
-    　・教師ページなら、flip_to_learning_code();
-      */
-}
-
-shakode.flip_to_tearcher_code = function()
-{
-    /*
-#learning_code 非表示
-#flip_button.value = "Flip to learning code.";
-#current_page.innerText = "Tearcher";
-      */
+    shakode.learning_code.style.display = "none";
+    shakode.teacher_code.disabled = false;
+    shakode.save_as_button.style.visibility = "visible";
+    shakode.flip_button.value = "Flip to learning code.";
+    shakode.current_page.innerHTML = "Teacher<rt>current_is</rt>";
 }
 
 shakode.flip_to_learning_code = function()
 {
-    /*
-#learning_code 表示
-#flip_button.value = "Flip to tearcher code.";
-#current_page.innerText = "Learning";
-      */
-}
-
-shakode.onSaveCode = function()
-{
-    /*
-    どのページ？
-    　・勉強ページなら、save_learning_code();
-    　・教師ページなら、save_tearcher_code();
-      */
+    shakode.learning_code.style.display = "block";
+    shakode.teacher_code.disabled = true;
+    shakode.save_as_button.style.visibility = "hidden";
+    shakode.flip_button.value = "Flip to teacher code.";
+    shakode.current_page.innerHTML = "Learning<rt>current_is</rt>";
 }
 
 shakode.save_learning_code = function()
 {
     /*
-    勉強ページ保存
-      */
+     勉強ページ保存
+     */
 }
 
 shakode.save_tearcher_code = function()
 {
     //教師ページ保存
-}
-
-shakode.resize_codes = function()
-{
-    var width = document.body.clientWidth;
-    //shakode.learning_code.style.right = width;
-    //shakode.teacher_code.style.right = width;
-    
 }
