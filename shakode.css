@@ -15,7 +15,7 @@ input[type="button"]
  border:solid 1px #999999;
  border-radius:3px;
 }
-@media (hover: hover) {
+@media (pointer: fine) {
  input[type="button"]:hover
  {
   color:#ffffdd;
