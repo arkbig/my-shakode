@@ -15,10 +15,12 @@ input[type="button"]
  border:solid 1px #999999;
  border-radius:3px;
 }
-input[type="button"]:hover
-{
- color:#ffffdd;
- background-color:#333344;
+@media (hover: hover) {
+ input[type="button"]:hover
+ {
+  color:#ffffdd;
+  background-color:#333344;
+ }
 }
 #select_target
 {
