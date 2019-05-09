@@ -17,8 +17,8 @@ input[type="button"]
 }
 input[type="button"]:hover
 {
- color:#ffffcc;
- background-color:#333366;
+ color:#ffffdd;
+ background-color:#333344;
 }
 #select_target
 {
@@ -45,7 +45,7 @@ select
  left:0px;
  right:0px;
  color:#777777;
- z-index:1
+ z-index:1;
 }
 
 #codes
