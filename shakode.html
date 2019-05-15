@@ -4,16 +4,31 @@
  <meta charset="UTF-8">
  <title>shakode</title> 
  <link rel="stylesheet" href="./shakode.css?0">
- <script src="./shakode.js"></script>
+ <script src="./shakode.js?0"></script>
 </head>
 <body>
 
 <div id="target_info">
  <form id="load_input">
-  Load the target as
-  '<input id="target_alias_text" type="text" placeholder="%{Please Input Alias}">'.
-  <input id="select_target_button" type="file" directory webkitdirectory>
-  <input id="load_target_button" type="button" value="Load it.">
+  <span class="wrap_group">
+   Load the target as
+   <ruby>
+    '<input id="target_alias_text" type="text" placeholder="%{Please Input Alias}">'.
+    <rt>if separeted by '/', it is directory(s).</rt>
+   </ruby>
+  </span> <span class="wrap_group">
+   <input id="select_target_button" type="file" directory webkitdirectory>
+   <span class="wrap_group">
+    <input id="load_target_button" type="button" value="Load dir">
+    <span id="directory_filter">
+     , using filter
+     <ruby>
+      <input id="load_filter" type="text" placeholder="%{Please Input Filter}">.
+      <rt>filter_is_a_regexp.</rt>
+     </ruby>
+    </span>
+   </span>
+  </span>
  </form>
 
  <p id="loaded_info">Loaded is
@@ -29,14 +44,19 @@
 <div id="code_info">
  <form>
   <div id="code_menu">
-   <input id="concentration_button" type="button" value="Focus on the code!">
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-   <input id="flip_button" type="button" value="Flip to teacher code.">
-   <ruby id="current_page">Learning<rt>current_is</rt></ruby>.
-   &nbsp;&nbsp;&nbsp;
-   <input id="save_button" type="button" value="Save">
-   <ruby id="current_file">NOT LOADED<rt>current_is</rt></ruby>.
-   <input id="save_as_button" type="button" value="Save as ...">
+   <span class="wrap_group">
+    <input id="concentration_button" type="button" value="Focus on the code!">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <span class="wrap_group">
+     <input id="flip_button" type="button" value="Flip to teacher code.">
+     <ruby id="current_page">Learning<rt>current_is</rt></ruby>.
+     &nbsp;&nbsp;
+    </span>
+   </span> <span class="wrap_group">
+    <input id="save_button" type="button" value="Save">
+    <ruby id="current_file">NOT LOADED<rt>current_is</rt></ruby>.
+    <input id="save_as_button" type="button" value="Save as ...">
+   </span>
   </div>
 
   <div id="codes">
