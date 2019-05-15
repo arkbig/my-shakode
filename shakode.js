@@ -129,7 +129,7 @@ class shakode_t
     {
         return false;/*TODO. test for file mode.*/
 
-        var input = document.createElement("input");
+        const input = document.createElement("input");
         if(typeof input.webkitdirectory !== "boolean" &&
            typeof input.directory !== "boolean")
         {
@@ -246,7 +246,7 @@ class shakode_t
 }
 
 
-function ready(callback){
+ready = (callback) => {
     if (document.readyState!='loading') callback();
     else if (document.addEventListener) document.addEventListener('DOMContentLoaded', callback);
     else document.attachEvent('onreadystatechange', ()=>{
