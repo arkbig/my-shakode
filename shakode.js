@@ -1,3 +1,13 @@
+/* TODO:
+・写経モード
+　・バーガーメニューに設置
+　　・focusモード+code_menuをバーガーメニューに移動
+・ストレージ保存
+・記号キー登録
+・ハイライト
+・diff
+*/
+
 class shakode_t
 {
     constructor ()
@@ -60,6 +70,7 @@ class shakode_t
         this.loaded_target_selection = document.getElementById("loaded_target_selection");
         this.loaded_target_placeholder = document.getElementById("loaded_target_placeholder");
         this.loaded_tree = document.getElementById("loaded_tree");
+        this.code_menu = document.getElementById("code_menu");
         this.concentration_button = document.getElementById("concentration_button");
         this.flip_button = document.getElementById("flip_button");
         this.current_page = document.getElementById("current_page");
@@ -68,6 +79,10 @@ class shakode_t
         this.current_file = document.getElementById("current_file");
         this.learning_code = document.getElementById("learning_code");
         this.teacher_code = document.getElementById("teacher_code");
+        this.burger_menu = document.getElementById("burger_menu");
+        this.burger_opt = document.getElementById("burger_opt");
+        this.shakyo_button = document.getElementById("shakyo_button");
+        this.burger_button = document.getElementById("burger_button");
 
         if (this.is_support_input_directory()) {
             this.target_alias_text = document.getElementById("target_alias_text");
@@ -104,6 +119,18 @@ class shakode_t
         this.save_as_button.addEventListener("click", ()=>{
             if (this.is_current_teacher()) {
                 this.save_as_teacher_code();
+            }
+        });
+
+        this.burger_button.addEventListener("click", ()=>{
+            /*open*/
+        });
+
+        this.shakyo_button.addEventListener("click", ()=>{
+            if (this.is_shakyo_mode()) {
+                this.exit_shakyo_mode();
+            } else {
+                this.enter_shakyo_mode();
             }
         });
     }
@@ -242,6 +269,25 @@ class shakode_t
     save_tearcher_code()
     {
         //教師ページ保存
+    }
+
+    is_shakyo_mode()
+    {
+        return this.code_menu.firstChild == null;
+    }
+
+    enter_shakyo_mode()
+    {
+        while (this.code_menu.firstChild) {
+            this.burger_opt.appendChild(this.code_menu.firstChild);
+        }
+    }
+
+    exit_shakyo_mode()
+    {
+        while (this.burger_opt.firstChild) {
+            this.code_menu.appendChild(this.burger_opt.firstChild);
+        }
     }
 }
 
