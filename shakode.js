@@ -29,6 +29,8 @@ class shakode_t
             this.blur_code();
         }
 
+        this.close_burger_menu();
+
         this.init_events();
     }
 
@@ -123,7 +125,11 @@ class shakode_t
         });
 
         this.burger_button.addEventListener("click", ()=>{
-            /*open*/
+            if (this.is_opening_burger_menu()) {
+                this.close_burger_menu();
+            } else {
+                this.open_burger_menu();
+            }
         });
 
         this.shakyo_button.addEventListener("click", ()=>{
@@ -281,6 +287,7 @@ class shakode_t
         while (this.code_menu.firstChild) {
             this.burger_opt.appendChild(this.code_menu.firstChild);
         }
+        this.focus_code();
     }
 
     exit_shakyo_mode()
@@ -288,6 +295,24 @@ class shakode_t
         while (this.burger_opt.firstChild) {
             this.code_menu.appendChild(this.burger_opt.firstChild);
         }
+        this.blur_code();
+    }
+
+    is_opening_burger_menu()
+    {
+        return this.burger_opt.style.display != "none";
+    }
+
+    open_burger_menu()
+    {
+        this.burger_opt.style.display = "inline-block";
+        this.shakyo_button.style.display = "inline-block";
+    }
+
+    close_burger_menu()
+    {
+        this.burger_opt.style.display = "none";
+        this.shakyo_button.style.display = "none";
     }
 }
 
