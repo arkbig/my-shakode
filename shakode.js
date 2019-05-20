@@ -288,6 +288,7 @@ class shakode_t
             this.burger_opt.appendChild(this.code_menu.firstChild);
         }
         this.focus_code();
+        this.close_burger_menu();
     }
 
     exit_shakyo_mode()
