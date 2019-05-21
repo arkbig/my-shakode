@@ -1,7 +1,4 @@
 /* TODO:
-・写経モード
-　・バーガーメニューに設置
-　　・focusモード+code_menuをバーガーメニューに移動
 ・ストレージ保存
 ・記号キー登録
 ・ハイライト
@@ -29,6 +26,7 @@ class shakode_t
             this.blur_code();
         }
 
+        this.flip_to_learning_code();
         this.close_burger_menu();
 
         this.init_events();
@@ -251,6 +249,7 @@ class shakode_t
     {
         this.learning_code.style.display = "none";
         this.teacher_code.disabled = false;
+        this.teacher_code.style.zIndex = 1;
         this.save_as_button.style.visibility = "visible";
         this.flip_button.value = "Flip to learning code.";
         this.current_page.innerHTML = "Teacher<rt>current_is</rt>";
@@ -260,6 +259,7 @@ class shakode_t
     {
         this.learning_code.style.display = "block";
         this.teacher_code.disabled = true;
+        this.teacher_code.style.zIndex = -1;
         this.save_as_button.style.visibility = "hidden";
         this.flip_button.value = "Flip to teacher code.";
         this.current_page.innerHTML = "Learning<rt>current_is</rt>";
@@ -289,6 +289,7 @@ class shakode_t
         }
         this.focus_code();
         this.close_burger_menu();
+        this.shakyo_button.innerText = "Ret";
     }
 
     exit_shakyo_mode()
@@ -297,6 +298,8 @@ class shakode_t
             this.code_menu.appendChild(this.burger_opt.firstChild);
         }
         this.blur_code();
+        this.close_burger_menu();
+        this.shakyo_button.innerText = "写経";
     }
 
     is_opening_burger_menu()
