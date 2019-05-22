@@ -28,6 +28,7 @@ class shakode_t
 
         this.flip_to_learning_code();
         this.close_burger_menu();
+        this.close_save_dialog();
 
         this.init_events();
     }
@@ -83,6 +84,11 @@ class shakode_t
         this.burger_opt = document.getElementById("burger_opt");
         this.shakyo_button = document.getElementById("shakyo_button");
         this.burger_button = document.getElementById("burger_button");
+        this.save_dialog = document.getElementById("save_dialog");
+        this.save_alias_text = document.getElementById("save_alias_text");
+        this.save_name_text = document.getElementById("save_name_text");
+        this.save_target_button = document.getElementById("save_target_button");
+        this.save_cancel_button = document.getElementById("save_cancel_button");
 
         if (this.is_support_input_directory()) {
             this.target_alias_text = document.getElementById("target_alias_text");
@@ -117,8 +123,13 @@ class shakode_t
             }
         });
         this.save_as_button.addEventListener("click", ()=>{
+console.log("OK");
             if (this.is_current_teacher()) {
-                this.save_as_teacher_code();
+console.log("OK");
+                if (this.is_closed_save_dialog()) {
+console.log("OK");
+                    this.open_save_dialog();
+                }
             }
         });
 
@@ -317,6 +328,22 @@ class shakode_t
     {
         this.burger_opt.style.display = "none";
         this.shakyo_button.style.display = "none";
+    }
+
+    is_closed_save_dialog()
+    {
+        return this.save_dialog.style.display == "none";
+    }
+
+    open_save_dialog()
+    {
+        this.save_dialog.style.display = "block";
+        
+    }
+
+    close_save_dialog()
+    {
+        this.save_dialog.style.display = "none";
     }
 }
 
