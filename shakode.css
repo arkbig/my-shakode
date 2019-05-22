@@ -70,7 +70,7 @@ select
 {
  position:relative;
  width:100%;
- height:98vh;
+ height:99vh;
 }
 
 #learning_code
@@ -98,7 +98,7 @@ select
 #burger_menu {
  position: sticky;
  bottom:4px;
- left:99vw;
+ left:100%;
  background-color: #ffffff00;
  z-index:4;
  text-align:right;
@@ -112,11 +112,6 @@ select
 }
 
 #shakyo_button {
-/*
-  position: sticky;
-  bottom:400px;
-  left:99vw;
-*/
   height: 36px;
   width: 36px;
   display: inline-block;
@@ -157,4 +152,16 @@ select
 }
 #burger_button div:nth-of-type(3) {
   bottom: 7px;
+}
+
+#save_dialog {
+ position:fixed;
+ top:0px;
+ left:0px;
+ z-index:6;
+ background-color:#ffffffdd;
+ height:100vh;
+ width:100vw;
+ text-align:center;
+ line-height:100vh;
 }
