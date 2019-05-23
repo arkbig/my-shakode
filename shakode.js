@@ -303,9 +303,11 @@ class shakode_t
 
     enter_shakyo_mode()
     {
+        let fragment = document.createDocumentFragment();
         while (this.code_menu.firstChild) {
-            this.burger_opt.appendChild(this.code_menu.firstChild);
+            fragment.appendChild(this.code_menu.firstChild);
         }
+        this.burger_opt.appendChild(fragment);
         this.focus_code();
         this.close_burger_menu();
         this.shakyo_button.innerText = "Ret";
@@ -313,9 +315,11 @@ class shakode_t
 
     exit_shakyo_mode()
     {
+        let fragment = document.createDocumentFragment();
         while (this.burger_opt.firstChild) {
-            this.code_menu.appendChild(this.burger_opt.firstChild);
+            fragment.appendChild(this.burger_opt.firstChild);
         }
+        this.code_menu.appendChild(fragment);
         this.blur_code();
         this.close_burger_menu();
         this.shakyo_button.innerText = "写経";
