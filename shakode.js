@@ -123,11 +123,8 @@ class shakode_t
             }
         });
         this.save_as_button.addEventListener("click", ()=>{
-console.log("OK");
             if (this.is_current_teacher()) {
-console.log("OK");
                 if (this.is_closed_save_dialog()) {
-console.log("OK");
                     this.open_save_dialog();
                 }
             }
@@ -351,6 +348,8 @@ console.log("OK");
         this.save_dialog.style.display = "block";
         history.pushState(null, null,location.pathname);
         this.self_open_save_dialog = true;
+
+        this.save_alias_text.focus();
     }
 
     close_save_dialog()
