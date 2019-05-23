@@ -148,6 +148,17 @@ console.log("OK");
                 this.enter_shakyo_mode();
             }
         });
+
+        window.onpopstate = (e) => {
+            if (this.self_open_save_dialog) {
+                this.self_open_save_dialog = false;
+                this.close_save_dialog();
+            }
+        };
+
+        this.save_cancel_button.addEventListener("click", ()=>{
+            this.close_save_dialog();
+        });
     }
 
 
@@ -338,12 +349,17 @@ console.log("OK");
     open_save_dialog()
     {
         this.save_dialog.style.display = "block";
-        
+        history.pushState(null, null,location.pathname);
+        this.self_open_save_dialog = true;
     }
 
     close_save_dialog()
     {
         this.save_dialog.style.display = "none";
+        if (this.self_open_save_dialog) {
+            this.self_open_save_dialog = false;
+            history.back();
+        }
     }
 }
 
