@@ -33,6 +33,11 @@ input[type="button"]
  padding:0.3em 0.8em;
 }
 
+.input_error
+{
+ background-color:#ffc0c077;
+}
+
 span.wrap_group
 {
  display:inline-block;
@@ -164,4 +169,9 @@ select
  width:100vw;
  text-align:center;
  padding:30vh 0px;
+}
+
+#save_form_error {
+ padding:1em;
+ text-align:left;
 }
