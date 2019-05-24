@@ -89,6 +89,7 @@ class shakode_t
         this.save_name_text = document.getElementById("save_name_text");
         this.save_target_button = document.getElementById("save_target_button");
         this.save_cancel_button = document.getElementById("save_cancel_button");
+        this.save_form_error = document.getElementById("save_form_error");
 
         if (this.is_support_input_directory()) {
             this.target_alias_text = document.getElementById("target_alias_text");
@@ -155,6 +156,10 @@ class shakode_t
 
         this.save_cancel_button.addEventListener("click", ()=>{
             this.close_save_dialog();
+        });
+
+        this.save_target_button.addEventListener("click", ()=>{
+            this.save_as_teacher_code();
         });
     }
 
@@ -303,9 +308,11 @@ class shakode_t
 
     enter_shakyo_mode()
     {
+        let fragment = document.createDocumentFragment();
         while (this.code_menu.firstChild) {
-            this.burger_opt.appendChild(this.code_menu.firstChild);
+            fragment.appendChild(this.code_menu.firstChild);
         }
+        this.burger_opt.appendChild(fragment);
         this.focus_code();
         this.close_burger_menu();
         this.shakyo_button.innerText = "Ret";
@@ -313,9 +320,11 @@ class shakode_t
 
     exit_shakyo_mode()
     {
+        let fragment = document.createDocumentFragment();
         while (this.burger_opt.firstChild) {
-            this.code_menu.appendChild(this.burger_opt.firstChild);
+            fragment.appendChild(this.burger_opt.firstChild);
         }
+        this.code_menu.appendChild(fragment);
         this.blur_code();
         this.close_burger_menu();
         this.shakyo_button.innerText = "写経";
@@ -349,6 +358,10 @@ class shakode_t
         history.pushState(null, null,location.pathname);
         this.self_open_save_dialog = true;
 
+        this.save_alias_text.classList.remove("input_error");
+        this.save_name_text.classList.remove("input_error");
+        this.save_form_error.innerHTML = "";
+
         this.save_alias_text.focus();
     }
 
@@ -359,6 +372,72 @@ class shakode_t
             this.self_open_save_dialog = false;
             history.back();
         }
+    }
+
+    save_as_teacher_code()
+    {
+        let alias_value = this.save_alias_text.value;
+        let name_value = this.save_name_text.value;
+        let form_error = this.save_form_error;
+        form_error.innerHTML = "";
+        if (alias_value && name_value) {
+            let err=false;
+            if (this.contains_invalid_dir_name_chars(alias_value)) {
+                this.save_alias_text.classList.add("input_error");
+                form_error.innerHTML += `<span class="wrap_group">Can not enter ${this.get_invalid_dir_name_chars().join(",")} in the target.</span>`;
+                err=true;
+            }
+            
+            if (this.contains_invalid_file_name_chars(name_value))
+            {
+                this.save_name_text.classList.add("input_error");
+                form_error.innerHTML += `<span class="wrap_group">Can not enter ${this.get_invalid_file_name_chars().join(",")} in the file.</span>`;
+                err=true;
+            }
+
+            if (!err) {
+                let {proj_name, sub_dir} = this.expand_proj_name_and_sub_dir(alias_value);
+                this.close_save_dialog();
+            }
+        } else {
+            if (alias_value) {
+                this.save_alias_text.classList.remove("input_error");
+            } else {
+                this.save_alias_text.classList.add("input_error");
+                form_error.innerHTML += '<span class="wrap_group">Enter the project name [can include /subdirs] in the target.</span> ';
+            }
+            if (name_value) {
+                this.save_name_text.classList.remove("input_error");
+            } else {
+                this.save_name_text.classList.add("input_error");
+                form_error.innerHTML += '<span class="wrap_group">Enter the name (with an extension) for the file.</span> ';
+            }
+        }
+    }
+
+    get_invalid_file_name_chars()
+    {
+        return ["/"];
+    }
+
+    contains_invalid_file_name_chars(file)
+    {
+        return true;
+    }
+
+    get_invalid_dir_name_chars()
+    {
+        return ["&amp;", "`"];
+    }
+
+    contains_invalid_dir_name_chars(dir)
+    {
+        return true;
+    }
+
+    expand_proj_name_and_sub_dir(value)
+    {
+        return { proj:"proj",dir:"dir" };
     }
 }
 
