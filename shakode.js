@@ -38,7 +38,7 @@ class shakode_t
         /*
          # storage rule
          projects: ｛ projects: [%｛proj_name｝,...] ｝
-         current: ｛ project: %｛proj_name｝, file: %｛file_path｝ ｝
+         current: ｛ project: %｛proj_name｝, path: %｛file_path｝ ｝
          files_%｛proj_name｝: ｛ files: [%｛file_path｝,...] ｝
          teacher_%｛proj_name｝_%｛file_path｝: ｛ last_update_date: %｛update_date｝, blob: %｛raw_data｝ ｝
          learning_%｛proj_name｝_%｛file_path｝: ｛ last_update_date: %｛update_date｝, blob: %｛raw_data｝ ｝
@@ -291,14 +291,12 @@ class shakode_t
 
     save_learning_code()
     {
-        /*
-         勉強ページ保存
-         */
+        this.storage.setItem("learnings_"+this.current.project+this.current.path, this.teacher_code.value);
     }
 
-    save_tearcher_code()
+    save_teacher_code()
     {
-        //教師ページ保存
+        this.storage.setItem("teachers_"+this.current.project+this.current.path, this.teacher_code.value);
     }
 
     is_shakyo_mode()
@@ -396,8 +394,30 @@ class shakode_t
             }
 
             if (!err) {
-                let {proj_name, sub_dir} = this.expand_proj_name_and_sub_dir(alias_value);
-                this.close_save_dialog();
+                let { proj_name, sub_dir } = this.expand_proj_name_and_sub_dir(alias_value);
+                if (proj_name) {
+                    if (! this.projects.includes(proj_name)) {
+                        this.projects.push(proj_name);
+                    }
+                    this.current.project = proj_name;
+                    this.save_projects(proj_name);
+
+                    const file_path = sub_dir + "/" + name_value;
+                    if (! this.files.includes(file_path)) {
+                        this.files.push(file_path);
+                    }
+                    this.current.path = file_path;
+                    this.save_files();
+
+                    this.save_current();
+
+                    this.save_teacher_code();
+
+                    this.close_save_dialog();
+                } else {
+                    this.save_alias_text.classList.add("input_error");
+                    form_error.innerHTML += '<span class="wrap_group">Enter the project name [can include /subdirs] in the target.</span> ';
+                }
             }
         } else {
             if (alias_value) {
@@ -417,27 +437,59 @@ class shakode_t
 
     get_invalid_file_name_chars()
     {
-        return ["/"];
+        return ['"','*','/',':','<','>','?','\\','|']; /*and ascii code 0x00-0x31*/
     }
 
     contains_invalid_file_name_chars(file)
     {
-        return true;
+        return this.contains_chars_in_str(file, this.get_invalid_file_name_chars());
     }
 
     get_invalid_dir_name_chars()
     {
-        return ["&amp;", "`"];
+        return ['"','*',':','<','>','?','\\','|']; /*and ascii code 0x00-0x31*/
     }
 
     contains_invalid_dir_name_chars(dir)
     {
-        return true;
+        return this.contains_chars_in_str(dir, this.get_invalid_dir_name_chars());
     }
 
     expand_proj_name_and_sub_dir(value)
     {
-        return { proj:"proj",dir:"dir" };
+        const pos = value.indexOf("/");
+        if (0 <= pos) {
+            return { proj_name: value.substr(0, pos), sub_dir: value.substr(pos) };
+        } else {
+            return { proj_name: value, sub_dir: "" }
+        }
+    }
+
+    contains_chars_in_str(str, arr)
+    {
+        for (let l=arr.length; l--;)
+        {
+            if (str.includes(arr[l]))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    save_projects()
+    {
+        this.storage.setItem("projects", JSON.stringify(this.projects));
+    }
+
+    save_files()
+    {
+        this.storage.setItem("files_"+this.current.project, JSON.stringify(this.files));
+    }
+
+    save_current()
+    {
+        this.storage.setItem("current", JSON.stringify(this.current));
     }
 }
 
