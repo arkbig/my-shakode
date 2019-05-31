@@ -76,6 +76,8 @@ select
  position:relative;
  width:100%;
  height:99vh;
+ font-size:16px;
+ line-height:1.2;
 }
 
 #learning_code
