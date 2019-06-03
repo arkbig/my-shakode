@@ -35,16 +35,7 @@ class shakode_t
 
     init_storage()
     {
-        /*
-         # storage rule
-         projects: ｛ projects: [%｛proj_name｝,...] ｝
-         current: ｛ project: %｛proj_name｝, path: %｛file_path｝ ｝
-         files_%｛proj_name｝: ｛ files: [%｛file_path｝,...] ｝
-         teacher_%｛proj_name｝_%｛file_path｝: ｛ last_update_date: %｛update_date｝, blob: %｛raw_data｝ ｝
-         learning_%｛proj_name｝_%｛file_path｝: ｛ last_update_date: %｛update_date｝, blob: %｛raw_data｝ ｝
-         tmp_%｛proj_name｝_%｛file_path｝: ｛ last_update_date: %｛update_date｝, blob: %｛row_data｝ ｝
-         */
-        this.storage = window.localstorage
+        this.storage = localStorage;
         window.addEventListener("storage", (e)=>{
             if (e.storageArea===this.storage) {
                 if (e.key!==null) {
@@ -62,6 +53,18 @@ class shakode_t
                 }
             }
         });
+        /*
+         # storage rule
+         projects: ｛ projects: [%｛proj_name｝,...] ｝
+         current: ｛ project: %｛proj_name｝, path: %｛file_path｝ ｝
+         files_%｛proj_name｝: ｛ files: [%｛file_path｝,...] ｝
+         teacher_%｛proj_name｝_%｛file_path｝: ｛ last_update_date: %｛update_date｝, blob: %｛raw_data｝ ｝
+         learning_%｛proj_name｝_%｛file_path｝: ｛ last_update_date: %｛update_date｝, blob: %｛raw_data｝ ｝
+         tmp_%｛proj_name｝_%｛file_path｝: ｛ last_update_date: %｛update_date｝, blob: %｛row_data｝ ｝
+         */
+        this.projects = [];
+        this.files = [];
+        this.current = {};
     }
 
     init_elements()
@@ -291,12 +294,22 @@ class shakode_t
 
     save_learning_code()
     {
-        this.storage.setItem("learnings_"+this.current.project+this.current.path, this.teacher_code.value);
+        const key = "learnings_"+this.current.project+this.current.path;
+        const value = {
+             "last_update": Date.now(),
+             "blob": this.learning_code.value
+        };
+        this.storage.setItem(key, JSON.stringify(value));
     }
 
     save_teacher_code()
     {
-        this.storage.setItem("teachers_"+this.current.project+this.current.path, this.teacher_code.value);
+        const key = "teachers_"+this.current.project+this.current.path;
+        const value = {
+          "last_update": Date.now(),
+             "blob": this.teacher_code.value
+        };
+        this.storage.setItem(key, JSON.stringify(value));
     }
 
     is_shakyo_mode()
@@ -398,8 +411,13 @@ class shakode_t
                 if (proj_name) {
                     if (! this.projects.includes(proj_name)) {
                         this.projects.push(proj_name);
+                        this.loaded_target_placeholder.style.display = "none";
+                        let opt = document.createElement("option");
+                        opt.innerText = proj_name;
+                        this.loaded_target_selection.appendChild(opt);
                     }
                     this.current.project = proj_name;
+                    this.loaded_target_selection.value = proj_name;
                     this.save_projects(proj_name);
 
                     const file_path = sub_dir + "/" + name_value;
@@ -407,6 +425,7 @@ class shakode_t
                         this.files.push(file_path);
                     }
                     this.current.path = file_path;
+                    this.current_file.innerHTML = file_path + "<rt>current_is</rt>";
                     this.save_files();
 
                     this.save_current();
