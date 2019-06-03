@@ -1,7 +1,18 @@
+@font-face {
+ font-family: 'Noto Sans JP';
+ font-style: normal;
+ font-weight: 400;
+ src: local("Noto Sans CJK JP Regular"),
+ url(//fonts.gstatic.com/ea/notosansjp/v5/NotoSansJP-Regular.woff2) format('woff2'),
+ url(//fonts.gstatic.com/ea/notosansjp/v5/NotoSansJP-Regular.woff) format('woff'),
+ url(//fonts.gstatic.com/ea/notosansjp/v5/NotoSansJP-Regular.otf) format('opentype');
+}
+
 html
 {
  font-size:16px;
- line-height:1.2;
+font-family: 'Noto Sans JP', sans-serif;
+font-feature-settings : "palt";
 }
 
 body
@@ -11,9 +22,9 @@ body
 }
  
 button,input,select,textarea {
-font-family : inherit;
- line-height:18px;
- font-size:16px;
+ font-family:inherit;
+ font-size:inherit;
+ line-height:inherit;
 }
 
 input[type="button"]
