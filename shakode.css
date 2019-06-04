@@ -1,18 +1,10 @@
-@font-face {
-  font-family: 'Noto Sans JP';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src:
-    local("Noto Sans CJK JP"),
-    local("Noto Sans JP"),
-    url('https://fonts.googleapis.com/css?family=Noto+Sans+JP&display=swap&subset=japanese');
-}
+/*@import url('https://fonts.googleapis.com/css?family=Noto+Sans+JP&display=swap&subset=japanese');*/
 
 html
 {
  font-size:16px;
- font-family: 'Noto Sans JP', sans-serif;
+ line-height:20px;
+ /*font-family: 'Noto Sans JP', sans-serif;*/
  font-feature-settings : "palt";
 }
 
