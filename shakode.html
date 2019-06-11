@@ -10,36 +10,16 @@
 <body>
 
 <div id="target_info">
- <form id="load_input">
-  <span class="wrap_group">
-   Load the target as
-   <ruby>
-    '<input id="target_alias_text" type="text" placeholder="%{Please Input Alias}">'.
-    <rt>if_separeted_by_'/',_it_is_directory(s).</rt>
-   </ruby>
-  </span> <span class="wrap_group">
-   <input id="select_target_button" type="file" directory webkitdirectory>
-   <span class="wrap_group">
-    <input id="load_target_button" type="button" value="Load dir">
-    <span id="directory_filter">
-     , using filter
-     <ruby>
-      <input id="load_filter" type="text" placeholder="%{Please Input Filter}">.
-      <rt>filter_is_a_regexp.</rt>
-     </ruby>
-    </span>
-   </span>
-  </span>
- </form>
-
- <p id="loaded_info">Loaded is
-  <select id="loaded_target_selection">
-   <option id="loaded_target_placeholder">%{NOT LOADED}</option>
-  </select>
- </p>
- <p id="loaded_tree">
-  ⊟ If loaded, the target directory tree will be displayed here.
- </p>
+<span id="loaded_project" class="wrap_group">
+ Project is
+  <select id="loaded_project_selection">
+   <option id="loaded_project_placeholder">%{NOT LOADED}</option>
+  </select>.
+</span><span id="loaded_path" class="wrap_group">
+ Path is
+  <select id="loaded_path_selection">
+   <option id="loaded_path_placeholder">%{NOT LOADED}</option>
+  </select>.
 </div>
 
 <div id="code_info">
@@ -47,15 +27,13 @@
   <div id="code_menu"><div id="code_menu_moving">
    <span class="wrap_group">
     <input id="concentration_button" type="button" value="Focus on the code!">
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <span class="wrap_group">
      <input id="flip_button" type="button" value="Flip to teacher code.">
-     <ruby id="current_page">Learning<rt>current_is</rt></ruby>.
-     &nbsp;&nbsp;
+     <ruby id="current_page">Learning.<rt>current_is</rt></ruby>
     </span>
    </span> <span class="wrap_group">
     <input id="save_button" type="button" value="Save">
-    <ruby id="current_file">NOT LOADED<rt>current_is</rt></ruby>.
+    <ruby id="current_path">NOT LOADED.<rt>current_is</rt></ruby>
     <input id="save_as_button" type="button" value="Save as ...">
    </span>
   </div></div>

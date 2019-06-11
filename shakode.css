@@ -60,15 +60,11 @@ ruby
  font-size:0.8rem;
 }
 
-#loaded_info
+#loaded_project
 {
  font-size:1.2rem;
  font-weight:bold;
-}
-select
-{
- font-size:1.2rem;
- font-weight:bold;
+ margin-right:1em;
 }
 
 #code_menu
@@ -82,6 +78,22 @@ select
  background-color:#ffffff77;
  z-index:2;
 }
+
+#concentration_button
+{
+ margin-right:2em;
+}
+
+#current_page
+{
+ margin-right:1em;
+}
+
+#current_path
+{
+ margin-right:1em;
+}
+
 
 #codes
 {
