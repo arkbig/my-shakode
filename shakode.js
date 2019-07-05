@@ -260,14 +260,14 @@ class shakode_t
                 if (storage_teacher) {
                     const teacher_obj = JSON.parse(storage_teacher);
                     if (teacher_obj.blob) {
-                        this.teacher_code.innerText = teacher_obj.blob;
+                        this.teacher_code.value = teacher_obj.blob;
                     }
                 }
                 const storage_learning = this.storage.getItem("learning_"+this.current_project_idx+"_"+this.current_path_idx);
                 if (storage_learning) {
                     const learning_obj = JSON.parse(storage_learning);
                     if (learning_obj.blob) {
-                        this.learning_code.innerText = learning_obj.blob;
+                        this.learning_code.value = learning_obj.blob;
                     }
                 }
             }
